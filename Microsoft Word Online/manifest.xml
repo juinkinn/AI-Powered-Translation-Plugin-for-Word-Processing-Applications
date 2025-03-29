@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xsi:type="TaskPaneApp">
+  <Id>01f4b2d9-7a0e-4e3e-8b1e-1e7a6b5c9d2f</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>xAI</ProviderName>
+  <DefaultLocale>en-us</DefaultLocale>
+  <DisplayName DefaultValue="AI Translator"/>
+  <Description DefaultValue="AI-powered translation for Word Online"/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+  <SupportUrl DefaultValue="https://example.com"/>
+  <AppDomains>
+    <AppDomain>https://generativelanguage.googleapis.com</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Document"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <Control xsi:type="Button" id="TaskpaneButton">
+    <Label>AI Translator</Label>
+    <Supertip>
+      <Title>AI Translator</Title>
+      <Description>Translate text using AI</Description>
+    </Supertip>
+    <Icon>
+      <bt:Image size="16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+      <bt:Image size="32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+      <bt:Image size="80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+    </Icon>
+    <Action xsi:type="ShowTaskpane">
+      <TaskpaneId>Office.AutoShowTaskpaneWithDocument</TaskpaneId>
+      <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+    </Action>
+  </Control>
+</OfficeApp>

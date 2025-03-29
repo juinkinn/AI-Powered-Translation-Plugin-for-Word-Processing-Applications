@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Translation Results</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 100%;
+        }
+        
+        h2 {
+            color: #4285F4;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        
+        .translation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        h3 {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .text-box {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            background-color: white;
+            flex-grow: 1;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #ddd;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        button:hover {
+            background-color: #3367D6;
+        }
+        
+        button.secondary {
+            background-color: #f1f1f1;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        button.secondary:hover {
+            background-color: #e5e5e5;
+        }
+    </style>
+    <script type="text/javascript">
+        Office.onReady(function() {
+            // Load translation results from sessionStorage
+            const originalText = sessionStorage.getItem('originalText') || 'No text available';
+            const translatedText = sessionStorage.getItem('translatedText') || 'No translation available';
+            
+            // Display the translation results
+            document.getElementById('originalText').textContent = originalText;
+            document.getElementById('translatedText').textContent = translatedText;
+            
+            // Add event handlers to buttons
+            document.getElementById('replaceButton').onclick = function() {
+                // Send message to parent window to replace the text
+                Office.context.ui.messageParent('replaceText');
+            };
+            
+            document.getElementById('copyButton').onclick = function() {
+                // Copy translation to clipboard
+                navigator.clipboard.writeText(translatedText)
+                    .then(() => {
+                        // Give feedback that copying was successful
+                        const copyButton = document.getElementById('copyButton');
+                        const originalText = copyButton.textContent;
+                        copyButton.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyButton.textContent = originalText;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+            };
+            
+            document.getElementById('closeButton').onclick = function() {
+                // Send message to parent window that dialog is closing
+                Office.context.ui.messageParent('dialogClosed');
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Translation Results</h2>
+        
+        <div class="translation-container">
+            <h3>Original Text:</h3>
+            <div id="originalText" class="text-box"></div>
+            
+            <h3>Translated Text:</h3>
+            <div id="translatedText" class="text-box"></div>
+        </div>
+        
+        <div class="actions">
+            <button id="copyButton" class="secondary">Copy Translation</button>
+            <button id="replaceButton">Replace in Document</button>
+            <button id="closeButton" class="secondary">Close</button>
+        </div>
+    </div>
+</body>
+</html>
