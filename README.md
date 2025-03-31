@@ -55,7 +55,7 @@ This will start a local web server.
 
 Now on [Microsoft Word Online](https://word.cloud.microsoft/), you will see the Add-ins option. (Home > ... > Add-ins)
 
-![addin](./addin.png)
+![addin](./img/addin.png)
 
 Click More add-ins and go to my add-ins, we can see Upload add-in option, upload the manifest.xml file in the project folder that we use Yeoman to generate before.
 
@@ -67,7 +67,7 @@ Before running, make sure you paste the API key of Gemini 2.0 Flash in the code.
 
 When starting the plugin, you can see its UI:
 
-![plugin](./plugin.PNG)
+![plugin](./img/plugin.PNG)
 
 You can select a piece of text that you want to translate. For **Google Docs** you can select more than one piece of text and translate it too, while **Microsoft Word Online** does not provide this. Or you can click translate whole text and it will translate all text in document. You can select source language and target language that you want to translate. Additionally, the plugin provides you translation style and temperature also. Temperature is for controlling randomness and creativity of the translation output.
 
@@ -75,8 +75,8 @@ Output will be shown as a pops-up.
 
 - Select one or many text
 
-[manytexts](./manytexts.PNG)
+[manytexts](./img/manytexts.PNG)
 
 - Whole document 
 
-[wholedoc](./wholedoc.PNG)
+[wholedoc](./img/wholedoc.PNG)
