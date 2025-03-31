@@ -3,7 +3,9 @@
 This add-in works with any word processing application and helps translate selected text or the entire document using AI. It supports multiple languages and enhances translations based on user preferences.
 
 **Platforms support:** Google Docs and Microsoft Word Online.
+
 **Translation AI model used:** Gemini 2.0 Flash.
+
 **Language packages from:** [LibreTranslate Languages](https://libretranslate.com/languages)
 
 ## 1. Development Overview
