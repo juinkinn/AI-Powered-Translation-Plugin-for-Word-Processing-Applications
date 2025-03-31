@@ -16,3 +16,14 @@ Open **Google Docs** and navigate to **Extensions > Apps Script**. In the **Apps
 Go back to your Google Docs file, and you'll see a new **"AI Translator"** menu in the toolbar.
 
 ### 1.2. Microsoft Word Online
+
+To develop an AI Translator add-in for Microsoft Word Online, I used the Yeoman Generator for Office Add-ins. This provides a structured template and necessary configurations to create an Office add-in.
+
+First, install these requirements:
+- Node.js: Can be downloaded at [Nodejs][https://nodejs.org/en].
+- Yeoman and generator-office
+
+```
+npm install -g yo generator-office
+```
+
