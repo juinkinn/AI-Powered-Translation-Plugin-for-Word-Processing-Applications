@@ -75,8 +75,8 @@ Output will be shown as a pops-up.
 
 - Select one or many text
 
-[manytexts](./img/manytexts.PNG)
+![manytexts](./img/manytexts.PNG)
 
 - Whole document 
 
-[wholedoc](./img/wholedoc.PNG)
+![wholedoc](./img/wholedoc.PNG)
