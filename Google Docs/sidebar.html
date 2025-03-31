@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Translator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at center, #6A5ACD 40%, #483D8B 80%, #2F0047 100%);
+            color: #ffffff;
+            padding: 15px;
+            max-width: 270px;
+            line-height: 1.5;
+            box-shadow: 0 0 20px rgba(106, 90, 205, 0.8); /* Neon glow effect */
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 12px;
+            background-color: #fff;
+            transition: border-color 0.2s ease;
+        }
+
+        select:focus {
+            border-color: #32CD32;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            background-color: #32CD32;
+            color: #ffffff;
+            border: 2px solid #32CD32;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #228B22;
+            color: #ffffff;
+            border-color: #228B22;
+        }
+
+        button:active {
+            background-color: #006400;
+            color: #ffffff;
+            border-color: #006400;
+        }
+
+        .slider-container {
+            margin-bottom: 15px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 5px 0;
+            -webkit-appearance: none;
+            background: #ffffff;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #32CD32;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #32CD32;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            font-size: 11px;
+            color: #ffffff;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function populateLanguages() {
+            google.script.run.withSuccessHandler(function(languages) {
+                var sourceLangSelect = document.getElementById("sourceLang");
+                var targetLangSelect = document.getElementById("targetLang");
+
+                languages.forEach(function(lang) {
+                    var option1 = document.createElement("option");
+                    option1.value = lang.code;
+                    option1.text = lang.name + " (" + lang.code + ")";
+                    sourceLangSelect.appendChild(option1);
+
+                    if (lang.code !== "auto") {
+                        var option2 = document.createElement("option");
+                        option2.value = lang.code;
+                        option2.text = lang.name + " (" + lang.code + ")";
+                        targetLangSelect.appendChild(option2);
+                    }
+                });
+
+                sourceLangSelect.value = "auto";
+                targetLangSelect.value = "en";
+            }).getSupportedLanguages();
+        }
+
+        function translateText(isWholeText) {
+            var sourceLang = document.getElementById("sourceLang").value;
+            var targetLang = document.getElementById("targetLang").value;
+            var temperature = document.getElementById("temperature").value;
+            var style = document.getElementById("style").value;
+            
+            if (isWholeText) {
+                google.script.run.withSuccessHandler(displayTranslation)
+                    .translateWholeText(sourceLang, targetLang, temperature, style);
+            } else {
+                google.script.run.withSuccessHandler(displayTranslation)
+                    .translateSelectedText(sourceLang, targetLang, temperature, style);
+            }
+        }
+
+        function displayTranslation(response) {
+            document.getElementById("output").innerHTML = response;
+        }
+
+        function updateSliderValue(value) {
+            document.getElementById("tempValue").textContent = value;
+        }
+
+        window.onload = populateLanguages;
+    </script>
+</head>
+<body>
+    <h2>AI-Powered Translation Plugin</h2>
+    
+    <label>Source Language:</label>
+    <select id="sourceLang"></select>
+
+    <label>Target Language:</label>
+    <select id="targetLang"></select>
+
+    <label>Translation Style:</label>
+    <select id="style">
+        <option value="neutral">Neutral (Default)</option>
+        <option value="formal_academic">Formal Academic</option>
+        <option value="professional_business">Professional Business</option>
+        <option value="technical">Technical</option>
+        <option value="casual">Casual</option>
+    </select>
+
+    <label>Temperature:</label>
+    <div class="slider-container">
+        <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.5" 
+               oninput="updateSliderValue(this.value)">
+        <div class="slider-value" id="tempValue">0.5</div>
+    </div>
+
+    <button onclick="translateText(false)">Translate Selected Text</button>
+    <button onclick="translateText(true)">Translate Whole Text</button>
+    
+</body>
+</html>

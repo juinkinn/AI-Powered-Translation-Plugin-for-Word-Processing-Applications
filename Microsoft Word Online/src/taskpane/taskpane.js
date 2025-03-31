@@ -57,11 +57,11 @@ function updateSliderValue(value) {
 
 function showPopup(content) {
   document.getElementById("popupContent").textContent = content;
-  document.getElementById("customPopup").style.display = "flex"; // Show popup centered
+  document.getElementById("customPopup").style.display = "flex"; 
 }
 
 function closePopup() {
-  document.getElementById("customPopup").style.display = "none"; // Hide popup
+  document.getElementById("customPopup").style.display = "none"; 
 }
 
 async function translateSelectedText() {
@@ -83,7 +83,7 @@ async function translateSelectedText() {
           }
 
           const translated = await translateTextAPI(selection.text, sourceLang, targetLang, temperature, style);
-          showPopup(translated); // Show only translated text
+          showPopup(translated); 
       });
   } catch (error) {
       console.error("Error in translateSelectedText:", error);
@@ -110,7 +110,7 @@ async function translateWholeText() {
           }
 
           const translated = await translateTextAPI(body.text, sourceLang, targetLang, temperature, style);
-          showPopup(translated); // Show only translated text
+          showPopup(translated);
       });
   } catch (error) {
       console.error("Error in translateWholeText:", error);
@@ -119,7 +119,7 @@ async function translateWholeText() {
 }
 
 async function translateTextAPI(text, sourceLang, targetLang, temperature, style) {
-  const apiKey = "AIzaSyCzKr2uARCIpvozTN2clbta5ZH5e-dSrMk"; // Replace with your actual API key
+  const apiKey = ""; 
   const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
   const stylePrompt = {
