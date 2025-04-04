@@ -2,7 +2,9 @@
 
 ## Student information
 **Name:** Nguyễn Hoàng Trung Kiên
+
 **Student's ID:** 22127478
+
 **Subject:** Natural Language Processing and Appplication
 
 ## 0. Introduction
