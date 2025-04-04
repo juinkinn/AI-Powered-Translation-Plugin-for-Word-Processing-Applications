@@ -1,5 +1,12 @@
 # AI-Powered-Translation-Plugin-for-Word-Processing-Applications
 
+## Student information
+**Name:** Nguyễn Hoàng Trung Kiên
+**Student's ID:** 22127478
+**Subject:** Natural Language Processing and Appplication
+
+## 0. Introduction
+
 This add-in works with any word processing application and helps translate selected text or the entire document using AI. It supports multiple languages and enhances translations based on user preferences.
 
 **Platforms support:** Google Docs and Microsoft Word Online.
